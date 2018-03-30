@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+	
+	<classPathEntry location="C:\Users\llz\work\apache-maven\repo\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar"/>
+  <context id="context1" >
+  	<commentGenerator> 
+  		<property name="suppressAllComments" value="true"/><!-- 关闭注释  -->
+  	</commentGenerator>
+    <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.107:1521:BOOK" userId="C_BOOK" password="C_BOOK" />
+    
+    <javaModelGenerator targetPackage="com.cs.system.entity" targetProject="book_p/src/main/java" />
+    <sqlMapGenerator targetPackage="mappings.system" targetProject="book_p/src/main/resources"  />
+    <javaClientGenerator targetPackage="com.cs.system.dao" targetProject="book_p/src/main/java" type="XMLMAPPER" />
+    
+    <table schema="c_book"
+      tableName="C_ORDER" domainObjectName="Order"
+    enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    </table>
+    
+   <!--  C_BOOK_INFO, C_CAR_INFO,C_ORDER
+    C_COLUMN,C_NEWS
+     C_WX_CONFIG, C_WX_MENU, C_WX_USER
+     
+     C_GLOBAL_CONFIG, , C_RESOURCE, C_ROLE, C_ROLE_RESOURCE_RELATION,
+    C_STATION, C_STATION_MENU_RELATION, C_STATION_NEWS_RELATION, C_USER,
+     C_USER_ROLE_RELATION, -->
+    
+<!--     <javaModelGenerator targetPackage="com.cs.system.entity" targetProject="mot_book/src/main/java" />
+    <sqlMapGenerator targetPackage="mappings" targetProject="mot_book/src/main/resources"  />
+    <javaClientGenerator targetPackage="com.cs.system.dao" targetProject="mot_book/src/main/java" type="XMLMAPPER" />
+    <table schema="mot" tableName="T_DCS_USER" domainObjectName="User" enableCountByExample="false" 
+    enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
+    
+ 
+  </context>
+</generatorConfiguration>

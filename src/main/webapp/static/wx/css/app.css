@@ -1,0 +1,96 @@
+
+html,body{height: 100%;width: 100%;padding: 0;margin: 0;}
+.mui-content{background: rgba(0,0,0,0);}
+.mui-content p{color: #333;}
+table tr td p{margin-bottom: 2px;}
+.mui-table-view.mui-grid-view{padding: 0;margin: 0;}
+.mui-content > .mui-table-view:first-child ,.mui-content > .mui-card:first-child{margin-top: 0px;}
+.mui-table-view.mui-grid-view .mui-table-view-cell{padding: 0;margin: 0;}
+.mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn) {margin: 0 0 0 20px;}
+.i-content-padded{padding: 2.5%;}
+.i-content-padded h5{font-size: 12px;}
+select, textarea, input[type='text'], input[type='search'], input[type='password'], input[type='datetime'], input[type='datetime-local'], input[type='date'], input[type='month'], input[type='time'], input[type='week'], input[type='number'], input[type='email'], input[type='url'], input[type='tel'], input[type='color'] {
+		height: 35px;margin-bottom: 1px;
+	}
+.mui-h5{font-size: 14px;
+    font-weight: normal;
+    color: #000;}
+    
+.mui-checkbox input[type='checkbox']:before {
+    font-size: 24px;
+}
+.mui-checkbox input[type='checkbox']:checked:before {
+    color: #007aff;
+}
+.mui-table-view-cell.mui-checkbox input[type=checkbox] {
+    top: 4px;
+}
+
+.mui-icon{
+	font-size: 16px;
+}
+
+/*菜单*/
+.i-index-header {height: 0;width: 100%;padding-bottom: 60%;background: url(../images/img1.png);background-size: 100% 100%;}		
+.i-business-list li{border-bottom: 1px solid #e9e7e7;border-right: 1px solid #e9e7e7;}
+.i-business-list li a{font-size: 14px; display:block; height: 50px;line-height: 50px;}  
+.i-business-list li.ic1 a{ background:url(../images/c1.png) no-repeat 12px 15px;background-size:15%;}
+.i-business-list li.ic2 a{ background:url(../images/c2.png) no-repeat 12px 15px;background-size:15%;}
+.i-business-list li.ic3 a{ background:url(../images/c3.png) no-repeat 12px 15px;background-size:15%;}
+.i-business-list li.ic4 a{ background:url(../images/c4.png) no-repeat 12px 15px;background-size:15%;}
+.i-business-list li.ic5 a{ background:url(../images/c5.png) no-repeat 12px 15px;background-size:15%;}
+.i-business-list li.ic6 a{ background:url(../images/c6.png) no-repeat 12px 15px;background-size:15%;}	
+
+/*预约渠道*/
+.i-chancel-body{background: #85b4ae;}
+.i-chancel-header{height: 0;width: 100%;padding-bottom: 90%;background: url(../images/img2.jpg);background-size: 100% 100%;}
+
+/* 按钮 */
+.i-btn-box{text-align: center;margin-top: 10px;}
+.i-btn-box .i-btn-bule{width: 100%;height: 30px;margin: 10px 0;border: 0px;color:#FFF;background: #85aae1;}
+.i-btn-box .i-big_btn-bule{width: 100%;height: 50px;margin: 10px 0;border: 0px;color:#FFF;background: #85aae1;}
+
+
+.i-content-padded .i-select{
+	padding-left: 10px!important;
+	border: 1px solid rgba(0,0,0,.2) !important;
+	height: 35px!important;
+	line-height: 29px;
+	font-size: 14px;
+}
+
+.i-content-padded input{
+	font-size: 14px;
+}
+
+.i-col-12{width:100%!important}
+.i-col-11{width:88%!important}
+.i-col-10{width:80%!important}
+.i-col-9{width:72%!important}
+.i-col-8{width:64.5%!important}
+.i-col-7{width:56%!important}
+.i-col-6{width:50%!important}
+.i-col-5{width:40%!important}
+.i-col-4{width:32%!important}
+.i-col-3{width:24%!important}
+.i-col-2{width:12%!important}
+.i-col-1{width:8%!important}
+
+.i-ul{background-color: #efeff4;}
+.i-ul .i-li{background-color: #FFF;margin-bottom: 5px;}
+.i-ul .i-li:after{background-color: #FFF;}
+.i-ul .i-li .i-li-content{color: #666;}
+.i-ul .i-li .i-li-content .mui-h6{color: #666;}
+.i-ul .i-li .i-li-content .i-btn{float: right;color:#666;margin-left: 10px;font-size: 12px;}
+.i-ul .i-li .i-li-content .i-btn .mui-icon{font-size: 16px;}
+
+/* 行级样式 */
+.i-table-view:before {
+    height: 0px;
+}
+.i-table-view .mui-table-view-cell{
+	padding:7px 10px ;
+	height: 35px;border:1px solid rgba(0, 0, 0, .2);
+	border-radius: 3px;
+	font-size: 14px;
+} 

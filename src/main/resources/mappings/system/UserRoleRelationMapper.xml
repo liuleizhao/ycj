@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cs.system.dao.UserRoleRelationDao" >
+  <resultMap id="BaseResultMap" type="com.cs.system.entity.UserRoleRelation" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="AUTHORIZE_TYPE" property="authorizeType" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, AUTHORIZE_TYPE, ROLE_ID, USER_ID, CREATED_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_USER_ROLE_RELATION_ROLE_RELATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_USER_ROLE_RELATION_ROLE_RELATION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cs.system.entity.UserRoleRelation" >
+  	<selectKey keyProperty="id" resultType="String" order="BEFORE">  
+       select sys_guid() from dual
+    </selectKey> 
+    insert into C_USER_ROLE_RELATION_ROLE_RELATION (ID, AUTHORIZE_TYPE, ROLE_ID, 
+      USER_ID, CREATED_DATE)
+    values (#{id,jdbcType=VARCHAR}, #{authorizeType,jdbcType=DECIMAL}, #{roleId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cs.system.entity.UserRoleRelation" >
+    insert into C_USER_ROLE_RELATION_ROLE_RELATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="authorizeType != null" >
+        AUTHORIZE_TYPE,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizeType != null" >
+        #{authorizeType,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cs.system.entity.UserRoleRelation" >
+    update C_USER_ROLE_RELATION_ROLE_RELATION
+    <set >
+      <if test="authorizeType != null" >
+        AUTHORIZE_TYPE = #{authorizeType,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cs.system.entity.UserRoleRelation" >
+    update C_USER_ROLE_RELATION_ROLE_RELATION
+    set AUTHORIZE_TYPE = #{authorizeType,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+      <!-- 自定义 -->
+  <sql id="conditions" >
+  	<where>
+  	 <foreach collection="sqlCriterions" item="criterionItem" separator="and" >
+  	 	<choose>
+  	 		<when test="criterionItem.noValue">
+  	 			${criterionItem.condition}
+  	 		</when>
+  	 		<when test="criterionItem.singleValue">
+  	 			${criterionItem.condition} #{criterionItem.value}
+  	 		</when>
+  	 		<when test="criterionItem.betweenValue">
+  	 			${criterionItem.condition} #{criterionItem.value} and #{criterionItem.secondValue}
+  	 		</when>
+  	 		<when test="criterionItem.listValue">
+  	 			 ${criterionItem.condition}
+                  <foreach collection="criterionItem.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+  	 		</when>
+  	 	</choose>
+      </foreach>
+  	</where>
+  </sql>
+
+  <select id="findAllData" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from C_USER_ROLE_RELATION
+  </select>
+  
+  <select id="findByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultMap="BaseResultMap">
+	select 
+	<if test="distinct" >
+      distinct
+    </if>
+	<include refid="Base_Column_List" />
+	  from C_USER_ROLE_RELATION
+	<if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+    <if test="orderbyClause != null and orderby" >
+    	order by
+    <foreach collection="orderbyClause" item="listItem" separator=",">
+      	 ${listItem}
+    </foreach>
+    </if>
+  </select>
+  
+  <select id="countByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultType="java.lang.Integer">
+   	select count(*) from C_USER_ROLE_RELATION
+    <if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+  </select>
+  
+  
+     <!-- 根据角色Id删除角色资源关联表 -->
+   <delete id="deleteByRoleId" parameterType="java.lang.String" >
+    	delete from C_USER_ROLE_RELATION where role_id = #{roleId,jdbcType=VARCHAR}
+   </delete>
+  <!-- 根据角色Id和用户id删除角色资源关联表 -->
+   <delete id="deleteByuserIdAndRoleId" parameterType="java.lang.String" >
+    	delete from C_USER_ROLE_RELATION where USER_ID = #{0,jdbcType=VARCHAR} and role_id = #{1,jdbcType=VARCHAR}  
+   </delete>
+   <!-- 根据用户Id删除用户角色关联表 -->
+   <delete id="deleteByuserId" parameterType="java.lang.String" >
+    	delete from C_USER_ROLE_RELATION where USER_ID = #{userId,jdbcType=VARCHAR}
+   </delete>
+   
+   <!-- 批量删除用户没有的角色 -->
+   <delete id="deletes">
+    	delete from C_USER_ROLE_RELATION where USER_ID = #{userId,jdbcType=VARCHAR} and
+    	ROLE_ID not in (
+    	<foreach collection="roleIds" item="item" separator=","  >
+    		#{item }
+    	</foreach>
+    	)
+   </delete>
+   
+   <!-- 批量插入用户新授权角色关系 -->
+   <insert id="inserts">
+	    insert into C_USER_ROLE_RELATION (ID, AUTHORIZE_TYPE, ROLE_ID,USER_ID, CREATED_DATE)
+	    <foreach collection="roleIds" item="roleId" separator="union all" >
+			select  sys_guid(),1, #{roleId,jdbcType=VARCHAR}, 
+      		#{userId,jdbcType=VARCHAR}, SYSTIMESTAMP from dual where not exists(select 1 from C_USER_ROLE_RELATION where role_id = #{roleId,jdbcType=VARCHAR} and user_id =  #{userId,jdbcType=VARCHAR})
+		</foreach>
+  </insert>
+</mapper>

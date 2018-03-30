@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cs.system.dao.OrderDao" >
+  <resultMap id="BaseResultMap" type="com.cs.system.entity.Order" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="WX_USER_ID" property="wxUserId" jdbcType="VARCHAR" />
+    <result column="ORDER_NUMBER" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="BOOK_NUMBER" property="bookNumber" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="CONSIGNEE" property="consignee" jdbcType="VARCHAR" />
+    <result column="CONSIGNEE_ADDRESS" property="consigneeAddress" jdbcType="VARCHAR" />
+    <result column="CONSIGNEE_PHONE" property="consigneePhone" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="FINISH_DATE" property="finishDate" jdbcType="TIMESTAMP" />
+    <result column="COURIER_NUMBER" property="courierNumber" jdbcType="VARCHAR" />
+    <result column="PAYMENT_DATA" property="paymentData" jdbcType="TIMESTAMP" />
+    <result column="HANDLING_DATE" property="handlingDate" jdbcType="TIMESTAMP" />
+    <result column="CANCEL_DATE" property="cancelDate" jdbcType="TIMESTAMP" />
+    <result column="AMOUNT_PAYMENT" property="amountPayment" jdbcType="FLOAT" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="VEHICLE_INFO_ID" property="vehicleInfoId" jdbcType="VARCHAR" />
+    
+    
+     <association property="bookInfo" column="BOOK_NUMBER"  fetchType="eager"
+   		select="com.cs.system.dao.BookInfoDao.selectByBookNumber"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, WX_USER_ID, ORDER_NUMBER, BOOK_NUMBER, STATE, CONSIGNEE, CONSIGNEE_ADDRESS, CONSIGNEE_PHONE, 
+    CREATE_DATE, FINISH_DATE, COURIER_NUMBER, PAYMENT_DATA, HANDLING_DATE, CANCEL_DATE, 
+    AMOUNT_PAYMENT, PHONE,VEHICLE_INFO_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_ORDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_ORDER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cs.system.entity.Order" >
+  	<selectKey keyProperty="id" resultType="String" order="BEFORE">  
+       select sys_guid() from dual
+    </selectKey>
+    insert into C_ORDER (ID, WX_USER_ID, ORDER_NUMBER, 
+      BOOK_NUMBER, STATE, CONSIGNEE, 
+      CONSIGNEE_ADDRESS, CONSIGNEE_PHONE, CREATE_DATE, 
+      FINISH_DATE, COURIER_NUMBER, PAYMENT_DATA, 
+      HANDLING_DATE, CANCEL_DATE, AMOUNT_PAYMENT, 
+      PHONE,VEHICLE_INFO_ID)
+    values (#{id,jdbcType=VARCHAR}, #{wxUserId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, 
+      #{bookNumber,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL}, #{consignee,jdbcType=VARCHAR}, 
+      #{consigneeAddress,jdbcType=VARCHAR}, #{consigneePhone,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{finishDate,jdbcType=TIMESTAMP}, #{courierNumber,jdbcType=VARCHAR}, #{paymentData,jdbcType=TIMESTAMP}, 
+      #{handlingDate,jdbcType=TIMESTAMP}, #{cancelDate,jdbcType=TIMESTAMP}, #{amountPayment,jdbcType=FLOAT}, 
+      #{phone,jdbcType=VARCHAR},#{vehicleInfoId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cs.system.entity.Order" >
+    insert into C_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="wxUserId != null" >
+        WX_USER_ID,
+      </if>
+      <if test="orderNumber != null" >
+        ORDER_NUMBER,
+      </if>
+      <if test="bookNumber != null" >
+        BOOK_NUMBER,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="consignee != null" >
+        CONSIGNEE,
+      </if>
+      <if test="consigneeAddress != null" >
+        CONSIGNEE_ADDRESS,
+      </if>
+      <if test="consigneePhone != null" >
+        CONSIGNEE_PHONE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="finishDate != null" >
+        FINISH_DATE,
+      </if>
+      <if test="courierNumber != null" >
+        COURIER_NUMBER,
+      </if>
+      <if test="paymentData != null" >
+        PAYMENT_DATA,
+      </if>
+      <if test="handlingDate != null" >
+        HANDLING_DATE,
+      </if>
+      <if test="cancelDate != null" >
+        CANCEL_DATE,
+      </if>
+      <if test="amountPayment != null" >
+        AMOUNT_PAYMENT,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="vehicleInfoId != null" >
+        VEHICLE_INFO_ID,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUserId != null" >
+        #{wxUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookNumber != null" >
+        #{bookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeAddress != null" >
+        #{consigneeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null" >
+        #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null" >
+        #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courierNumber != null" >
+        #{courierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentData != null" >
+        #{paymentData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handlingDate != null" >
+        #{handlingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountPayment != null" >
+        #{amountPayment,jdbcType=FLOAT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+       <if test="vehicleInfoId != null" >
+        #{vehicleInfoId,jdbcType=FLOAT},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cs.system.entity.Order" >
+    update C_ORDER
+    <set >
+      <if test="wxUserId != null" >
+        WX_USER_ID = #{wxUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null" >
+        ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookNumber != null" >
+        BOOK_NUMBER = #{bookNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="consignee != null" >
+        CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeAddress != null" >
+        CONSIGNEE_ADDRESS = #{consigneeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null" >
+        CONSIGNEE_PHONE = #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishDate != null" >
+        FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="courierNumber != null" >
+        COURIER_NUMBER = #{courierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentData != null" >
+        PAYMENT_DATA = #{paymentData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handlingDate != null" >
+        HANDLING_DATE = #{handlingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        CANCEL_DATE = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountPayment != null" >
+        AMOUNT_PAYMENT = #{amountPayment,jdbcType=FLOAT},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleInfoId != null" >
+        VEHICLE_INFO_ID = #{vehicleInfoId,jdbcType=FLOAT},
+      </if>
+      
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cs.system.entity.Order" >
+    update C_ORDER
+    set WX_USER_ID = #{wxUserId,jdbcType=VARCHAR},
+      ORDER_NUMBER = #{orderNumber,jdbcType=VARCHAR},
+      BOOK_NUMBER = #{bookNumber,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=DECIMAL},
+      CONSIGNEE = #{consignee,jdbcType=VARCHAR},
+      CONSIGNEE_ADDRESS = #{consigneeAddress,jdbcType=VARCHAR},
+      CONSIGNEE_PHONE = #{consigneePhone,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+      COURIER_NUMBER = #{courierNumber,jdbcType=VARCHAR},
+      PAYMENT_DATA = #{paymentData,jdbcType=TIMESTAMP},
+      HANDLING_DATE = #{handlingDate,jdbcType=TIMESTAMP},
+      CANCEL_DATE = #{cancelDate,jdbcType=TIMESTAMP},
+      AMOUNT_PAYMENT = #{amountPayment,jdbcType=FLOAT},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      VEHICLE_INFO_ID = #{vehicleInfoId,jdbcType=FLOAT}
+      
+      
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+         <!-- 自定义 -->
+  <sql id="conditions" >
+  	<where>
+  	 <foreach collection="sqlCriterions" item="criterionItem" separator="and" >
+  	 	<choose>
+  	 		<when test="criterionItem.noValue">
+  	 			${criterionItem.condition}
+  	 		</when>
+  	 		<when test="criterionItem.singleValue">
+  	 			${criterionItem.condition} #{criterionItem.value}
+  	 		</when>
+  	 		<when test="criterionItem.betweenValue">
+  	 			${criterionItem.condition} #{criterionItem.value} and #{criterionItem.secondValue}
+  	 		</when>
+  	 		<when test="criterionItem.listValue">
+  	 			 ${criterionItem.condition}
+                  <foreach collection="criterionItem.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+  	 		</when>
+  	 	</choose>
+      </foreach>
+  	</where>
+  </sql>
+
+  <select id="findAllData" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from C_ORDER
+  </select>
+  
+  <select id="findByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultMap="BaseResultMap">
+	select 
+	<if test="distinct" >
+      distinct
+    </if>
+	<include refid="Base_Column_List" />
+	  from C_ORDER
+	<if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+    <if test="orderbyClause != null and orderby" >
+    	order by
+    <foreach collection="orderbyClause" item="listItem" separator=",">
+      	 ${listItem}
+    </foreach>
+    </if>
+  </select>
+  
+  <select id="countByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultType="java.lang.Integer">
+   	select count(*) from C_ORDER
+    <if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+  </select>
+  
+</mapper>

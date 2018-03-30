@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cs.system.dao.CarInfoDao" >
+  <resultMap id="BaseResultMap" type="com.cs.system.entity.CarInfo" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="NEWFLAG" property="newflag" jdbcType="VARCHAR" />
+    <result column="PLAT_NUMBER" property="platNumber" jdbcType="VARCHAR" />
+    <result column="FRAME_NUMBER" property="frameNumber" jdbcType="VARCHAR" />
+    <result column="ENGINE_NUMBER" property="engineNumber" jdbcType="VARCHAR" />
+    <result column="VEHICLE_TYPE" property="vehicleType" jdbcType="VARCHAR" />
+    <result column="VEHICLE_CHARACTER" property="vehicleCharacter" jdbcType="DECIMAL" />
+    <result column="CAR_TYPE_ID" property="carTypeId" jdbcType="VARCHAR" />
+    <result column="DRIVER_TYPE" property="driverType" jdbcType="DECIMAL" />
+    <result column="FUEL_TYPE" property="fuelType" jdbcType="DECIMAL" />
+    <result column="USE_CHARATER" property="useCharater" jdbcType="VARCHAR" />
+    <result column="BUS_COMPANY_ID" property="busCompanyId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, NEWFLAG, PLAT_NUMBER, FRAME_NUMBER, ENGINE_NUMBER, VEHICLE_TYPE, VEHICLE_CHARACTER, 
+    CAR_TYPE_ID, DRIVER_TYPE, FUEL_TYPE, USE_CHARATER, BUS_COMPANY_ID, CREATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_CAR_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_CAR_INFO
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cs.system.entity.CarInfo" >
+  	<selectKey keyProperty="id" resultType="String" order="BEFORE">  
+       select sys_guid() from dual
+    </selectKey> 
+    insert into C_CAR_INFO (ID, USER_ID, NEWFLAG, 
+      PLAT_NUMBER, FRAME_NUMBER, ENGINE_NUMBER, 
+      VEHICLE_TYPE, VEHICLE_CHARACTER, CAR_TYPE_ID, 
+      DRIVER_TYPE, FUEL_TYPE, USE_CHARATER, 
+      BUS_COMPANY_ID, CREATE_DATE)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{newflag,jdbcType=VARCHAR}, 
+      #{platNumber,jdbcType=VARCHAR}, #{frameNumber,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR}, 
+      #{vehicleType,jdbcType=VARCHAR}, #{vehicleCharacter,jdbcType=DECIMAL}, #{carTypeId,jdbcType=VARCHAR}, 
+      #{driverType,jdbcType=DECIMAL}, #{fuelType,jdbcType=DECIMAL}, #{useCharater,jdbcType=VARCHAR}, 
+      #{busCompanyId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cs.system.entity.CarInfo" >
+    insert into C_CAR_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="newflag != null" >
+        NEWFLAG,
+      </if>
+      <if test="platNumber != null" >
+        PLAT_NUMBER,
+      </if>
+      <if test="frameNumber != null" >
+        FRAME_NUMBER,
+      </if>
+      <if test="engineNumber != null" >
+        ENGINE_NUMBER,
+      </if>
+      <if test="vehicleType != null" >
+        VEHICLE_TYPE,
+      </if>
+      <if test="vehicleCharacter != null" >
+        VEHICLE_CHARACTER,
+      </if>
+      <if test="carTypeId != null" >
+        CAR_TYPE_ID,
+      </if>
+      <if test="driverType != null" >
+        DRIVER_TYPE,
+      </if>
+      <if test="fuelType != null" >
+        FUEL_TYPE,
+      </if>
+      <if test="useCharater != null" >
+        USE_CHARATER,
+      </if>
+      <if test="busCompanyId != null" >
+        BUS_COMPANY_ID,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="newflag != null" >
+        #{newflag,jdbcType=VARCHAR},
+      </if>
+      <if test="platNumber != null" >
+        #{platNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="frameNumber != null" >
+        #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null" >
+        #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleCharacter != null" >
+        #{vehicleCharacter,jdbcType=DECIMAL},
+      </if>
+      <if test="carTypeId != null" >
+        #{carTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null" >
+        #{driverType,jdbcType=DECIMAL},
+      </if>
+      <if test="fuelType != null" >
+        #{fuelType,jdbcType=DECIMAL},
+      </if>
+      <if test="useCharater != null" >
+        #{useCharater,jdbcType=VARCHAR},
+      </if>
+      <if test="busCompanyId != null" >
+        #{busCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cs.system.entity.CarInfo" >
+    update C_CAR_INFO
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="newflag != null" >
+        NEWFLAG = #{newflag,jdbcType=VARCHAR},
+      </if>
+      <if test="platNumber != null" >
+        PLAT_NUMBER = #{platNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="frameNumber != null" >
+        FRAME_NUMBER = #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null" >
+        ENGINE_NUMBER = #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        VEHICLE_TYPE = #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleCharacter != null" >
+        VEHICLE_CHARACTER = #{vehicleCharacter,jdbcType=DECIMAL},
+      </if>
+      <if test="carTypeId != null" >
+        CAR_TYPE_ID = #{carTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverType != null" >
+        DRIVER_TYPE = #{driverType,jdbcType=DECIMAL},
+      </if>
+      <if test="fuelType != null" >
+        FUEL_TYPE = #{fuelType,jdbcType=DECIMAL},
+      </if>
+      <if test="useCharater != null" >
+        USE_CHARATER = #{useCharater,jdbcType=VARCHAR},
+      </if>
+      <if test="busCompanyId != null" >
+        BUS_COMPANY_ID = #{busCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cs.system.entity.CarInfo" >
+    update C_CAR_INFO
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      NEWFLAG = #{newflag,jdbcType=VARCHAR},
+      PLAT_NUMBER = #{platNumber,jdbcType=VARCHAR},
+      FRAME_NUMBER = #{frameNumber,jdbcType=VARCHAR},
+      ENGINE_NUMBER = #{engineNumber,jdbcType=VARCHAR},
+      VEHICLE_TYPE = #{vehicleType,jdbcType=VARCHAR},
+      VEHICLE_CHARACTER = #{vehicleCharacter,jdbcType=DECIMAL},
+      CAR_TYPE_ID = #{carTypeId,jdbcType=VARCHAR},
+      DRIVER_TYPE = #{driverType,jdbcType=DECIMAL},
+      FUEL_TYPE = #{fuelType,jdbcType=DECIMAL},
+      USE_CHARATER = #{useCharater,jdbcType=VARCHAR},
+      BUS_COMPANY_ID = #{busCompanyId,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+             <!-- 自定义 -->
+  <sql id="conditions" >
+  	<where>
+  	 <foreach collection="sqlCriterions" item="criterionItem" separator="and" >
+  	 	<choose>
+  	 		<when test="criterionItem.noValue">
+  	 			${criterionItem.condition}
+  	 		</when>
+  	 		<when test="criterionItem.singleValue">
+  	 			${criterionItem.condition} #{criterionItem.value}
+  	 		</when>
+  	 		<when test="criterionItem.betweenValue">
+  	 			${criterionItem.condition} #{criterionItem.value} and #{criterionItem.secondValue}
+  	 		</when>
+  	 		<when test="criterionItem.listValue">
+  	 			 ${criterionItem.condition}
+                  <foreach collection="criterionItem.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+  	 		</when>
+  	 	</choose>
+      </foreach>
+  	</where>
+  </sql>
+
+  <select id="findAllData" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from C_CAR_INFO
+  </select>
+  
+  <select id="findByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultMap="BaseResultMap">
+	select 
+	<if test="distinct" >
+      distinct
+    </if>
+	<include refid="Base_Column_List" />
+	  from C_CAR_INFO
+	<if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+    <if test="orderbyClause != null and orderby" >
+    	order by
+    <foreach collection="orderbyClause" item="listItem" separator=",">
+      	 ${listItem}
+    </foreach>
+    </if>
+  </select>
+  
+  <select id="countByCondition" parameterType="com.cs.mvc.dao.SqlCondition" resultType="java.lang.Integer">
+   	select count(*) from C_CAR_INFO
+    <if test="_parameter != null" >
+      <include refid="conditions" />
+    </if>
+  </select>
+  
+</mapper>
